@@ -1,9 +1,30 @@
 'use strict';
 
-(function () {
+let myData = {
+  username: null,
+  socketId: null,
+  roomId: null,
+};
 
+(function () {
+  let username;
+
+  while (!username) {
+    username = prompt("Enter your name: ");
+  }
+  const roomId = document.getElementById('roomId').value;
 
   const socket = io();
+  socket.emit('join', { username, roomId });
+
+
+  socket.on('user-connected', function (data) {
+    const usersUl = document.getElementById('users');
+    const li = document.createElement('li');
+    li.innerHTML = data.username
+    li.id = socket.id;
+    usersUl.appendChild(li);
+  });
 
   const canvas = document.getElementsByClassName('whiteboard')[0];
   const colors = document.getElementsByClassName('color');

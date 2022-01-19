@@ -13,18 +13,24 @@
 </head>
 
 <body>
-
+  <input type="hidden" id="roomId" value="<%=roomId%>">
   <canvas class="whiteboard"></canvas>
   <div class="row col">
-    <div id="users" class="col-md-3">
+    <div class="col-md-3">
       <h3>Users</h3>
-      <ul>
-        <li>User 1</li>
-        <li>User 2</li>
-        <li>User 3</li>
-        <li>User 4</li>
-        <li>User 5</li>
+      <ul id="users">
+        <% usersInRoom.forEach(user=> { %>
+          <li id="<%=user.socketId%>">
+            <%= user.username %>
+          </li>
+          <% }) %>
       </ul>
+    </div>
+    <!-- room Id -->
+    <div class="col-md-6">
+      <h3>RoomId: <code id="roomId">
+                  <%= roomId %>
+                </code></h3>
     </div>
     <div class="colors py-2 col-md-3 ">
       <div class="color black"></div>
@@ -33,6 +39,8 @@
       <div class="color blue"></div>
       <div class="color yellow"></div>
     </div>
+
+
   </div>
 
   <!-- left -->
