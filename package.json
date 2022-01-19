@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/main.js",
-    "tsc": "tsc",
-    "postinstall": "npm run tsc",
-    "build": "NODE_ENV=production tsc"
+    "dev": "nodemon src/main.ts",
+    "start": "tsc && node dist/main.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +14,6 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "postinstall": "^0.7.4",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
   },
