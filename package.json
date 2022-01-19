@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/main.ts",
-    "start": "node dist/main.js",
+    "start": "node build/main.js",
     "build": "tsc",
     "postinstall": "npm run build"
   },
