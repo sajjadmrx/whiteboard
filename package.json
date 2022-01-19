@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node build/main.js",
     "build": "tsc",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "build": "NODE_ENV=production tsc",
   },
   "keywords": [],
   "author": "",
