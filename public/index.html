@@ -15,14 +15,28 @@
 <body>
 
   <canvas class="whiteboard"></canvas>
-
-  <div class="colors py-2 ml-5 bg-dark">
-    <div class="color black"></div>
-    <div class="color red"></div>
-    <div class="color green"></div>
-    <div class="color blue"></div>
-    <div class="color yellow"></div>
+  <div class="row col">
+    <div id="users" class="col-md-3">
+      <h3>Users</h3>
+      <ul>
+        <li>User 1</li>
+        <li>User 2</li>
+        <li>User 3</li>
+        <li>User 4</li>
+        <li>User 5</li>
+      </ul>
+    </div>
+    <div class="colors py-2 col-md-3 ">
+      <div class="color black"></div>
+      <div class="color red"></div>
+      <div class="color green"></div>
+      <div class="color blue"></div>
+      <div class="color yellow"></div>
+    </div>
   </div>
+
+  <!-- left -->
+
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
