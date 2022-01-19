@@ -48,4 +48,3 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 # Screenshots<a name="screenshots"></a>
 
-![Auth](https://i.imgur.com/SOjU17F.png)
