@@ -15,7 +15,7 @@ let myData = {
   const roomId = document.getElementById('roomId').value;
 
   const socket = io();
-  socket.emit('join', { username, roomId });
+  socket.emit('joinRoom', { username, roomId });
 
 
   socket.on('user-connected', function (data) {
