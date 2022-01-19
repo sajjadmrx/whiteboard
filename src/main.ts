@@ -57,7 +57,6 @@ class WhiteBoard {
       const pathEvents = __dirname + path.sep + 'events';
       const eventFiles = fs.readdirSync(pathEvents);
       for (const file of eventFiles) {
-
         const eventClass = require(pathEvents + path.sep + file).default;
         if (!eventClass.enabled)
           return;

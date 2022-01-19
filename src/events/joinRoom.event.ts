@@ -21,7 +21,7 @@ class JoinRoom {
     });
 
     this.socket.join(this.data.roomId);
-
+    this.data.socketId = this.socket.id;
 
     this.io.to(this.data.roomId).emit('user-connected', this.data);
   }

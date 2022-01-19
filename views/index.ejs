@@ -8,40 +8,55 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+
+  <style>
+    .whiteboard {
+      /* border: solid 2px red */
+    }
+  </style>
 
 </head>
 
 <body>
   <input type="hidden" id="roomId" value="<%=roomId%>">
   <canvas class="whiteboard"></canvas>
-  <div class="row col">
-    <div class="col-md-3">
-      <h3>Users</h3>
-      <ul id="users">
+  <!-- room Id -->
+  <div class="col-md-6">
+    <h3>RoomId: <code id="roomId">
+                      <%= roomId %>
+                    </code></h3>
+  </div>
+  <div class="colors py-2 col-md-3 ">
+    <div class="color black" data-hexColor='#000000'></div>
+    <div class="color red" data-hexColor='#ff0000'></div>
+    <div class="color green" data-hexColor='#00ff00'></div>
+    <div class="color blue" data-hexColor='#0000ff'></div>
+    <div class="color yellow" data-hexColor='#ffff00'></div>
+  </div>
+
+
+
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">
+
+
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <span class='text-center'>Users</span>
+      <ul id="users" class="list-group-item list-group-item-action py-3 lh-tight">
+
         <% usersInRoom.forEach(user=> { %>
           <li id="<%=user.socketId%>">
             <%= user.username %>
+              <span id="status_<%= user.socketId %>"></span>
           </li>
           <% }) %>
       </ul>
     </div>
-    <!-- room Id -->
-    <div class="col-md-6">
-      <h3>RoomId: <code id="roomId">
-                  <%= roomId %>
-                </code></h3>
-    </div>
-    <div class="colors py-2 col-md-3 ">
-      <div class="color black"></div>
-      <div class="color red"></div>
-      <div class="color green"></div>
-      <div class="color blue"></div>
-      <div class="color yellow"></div>
-    </div>
-
 
   </div>
+
 
   <!-- left -->
 

@@ -1,5 +1,5 @@
 import { Server, Socket } from "socket.io";
-
+import * as db from "../db";
 
 
 class disconnect {
@@ -12,6 +12,9 @@ class disconnect {
   }
 
   async run(): Promise<void> {
+    this.socket.broadcast.emit('left', this.socket.id);
+    db.deleteUser(this.socket.id);
+
 
   }
 

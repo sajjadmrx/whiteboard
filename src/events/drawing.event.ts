@@ -14,7 +14,9 @@ class drawing {
   }
 
   async run(): Promise<void> {
-    this.socket.broadcast.emit('drawing', this.data);
+    this.data.socketId = this.socket.id;
+    const roomId = this.data.roomId;
+    this.socket.to(roomId).emit(drawing.eventName, this.data);
   }
 
 }

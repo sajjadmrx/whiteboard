@@ -12,19 +12,43 @@ let myData = {
   while (!username) {
     username = prompt("Enter your name: ");
   }
+
+  // change title
+  document.title = `Your Name: ${username}`;
+
+
   const roomId = document.getElementById('roomId').value;
 
   const socket = io();
-  socket.emit('joinRoom', { username, roomId });
+  socket.on('connect', () => {
+    myData = {
+      username,
+      roomId,
+      socketId: socket.id,
+    }
 
+  })
+
+  socket.emit('joinRoom', { username, roomId });
 
   socket.on('user-connected', function (data) {
     const usersUl = document.getElementById('users');
     const li = document.createElement('li');
     li.innerHTML = data.username
-    li.id = socket.id;
+    li.id = data.socketId;
+    const span = document.createElement('span');
+    span.id = `status_${socket.id}`;
+    li.appendChild(span);
     usersUl.appendChild(li);
   });
+
+  socket.on('left', (socketId) => {
+    const userLi = document.getElementById(socketId);
+    console.log(userLi, socketId);
+    if (userLi) {
+      userLi.remove();
+    }
+  })
 
   const canvas = document.getElementsByClassName('whiteboard')[0];
   const colors = document.getElementsByClassName('color');
@@ -60,6 +84,7 @@ let myData = {
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
+
     context.strokeStyle = color;
     context.lineWidth = 2;
     context.stroke();
@@ -75,7 +100,7 @@ let myData = {
       x1: x1 / w,
       y1: y1 / h,
       color: color,
-      username: getRandomUsername()
+      roomId
     });
   }
 
@@ -119,6 +144,7 @@ let myData = {
     var w = canvas.width;
     var h = canvas.height;
     drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
+    updateUserStatus(data.socketId, data.color)
   }
 
   // make the canvas fill its parent
@@ -127,13 +153,29 @@ let myData = {
     canvas.height = window.innerHeight;
   }
 
-  function getRandomUsername() {
-    const x = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`;
-    let text = ``;
-    for (let i = 0; i < 5; i++) {
-      text += x.charAt(Math.floor(Math.random() * x.length));
+  function updateUserStatus(socketId, color) {
+    const usernameHtml = document.getElementById(socketId);
+    const colorHtml = document.getElementsByClassName(color)[0]
+    // get attribute hexcolor
+    const hex = colorHtml.getAttribute('data-hexcolor');
+
+    if (usernameHtml) {
+
+      const status = usernameHtml.firstElementChild
+      if (status) {
+        status.innerHTML = `
+          <i class="fas fa-circle" style="color: ${hex}"></i> drawing...
+        `
+
+        setTimeout(() => {
+          status.innerHTML = ''
+          status.style.backgroundColor = ''
+        }, 1000)
+      }
     }
-    return text;
   }
+
+
+
 
 })()
