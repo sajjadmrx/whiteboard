@@ -12,7 +12,7 @@ A brief description of what this project does and who it's for
 + [Installation](#installation)
 + [Screenshots](#screenshots)
 ## Demo<a name="demo"></a>
-Check Demo (coming Soon 🎈)
+Check Deme [click here](https://whiteboardts.herokuapp.com/)
 
 ## Features<a name="features"></a>
 + Uses Express as the application Framework.
@@ -47,4 +47,4 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 
 # Screenshots<a name="screenshots"></a>
-
+	![Screenshot](https://i.imgur.com/E8ujuPw.png)
